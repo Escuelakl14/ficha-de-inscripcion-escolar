@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscripciones - Colegio Internacional San Francisco</title>
+    <title>Inscripciones - U.E.E Rafael Angel Caridad</title>
     <!-- Tailwind CSS para diseño profesional de vanguardia -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts para tipografía de alta legibilidad -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2 family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- FontAwesome para iconos modernos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
@@ -67,7 +67,7 @@
                     <i class="fa-solid fa-graduation-cap text-2xl animate-pulse"></i>
                 </div>
                 <div>
-                    <span class="font-extrabold text-xl text-slate-900 tracking-tight block leading-none">Colegio San Francisco</span>
+                    <span class="font-extrabold text-xl text-slate-900 tracking-tight block leading-none">U.E.E Rafael Angel Caridad</span>
                     <span class="text-xs text-amber-500 font-bold tracking-wider uppercase">Portal de Admisiones</span>
                 </div>
             </div>
@@ -104,7 +104,7 @@
                     Forjando el Camino hacia la <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-amber-300 to-emerald-400">Excelencia Educativa</span>
                 </h1>
                 <p class="text-lg sm:text-xl text-slate-300 font-normal mb-10 max-w-2xl mx-auto leading-relaxed">
-                    Bienvenidos al sistema automatizado de admisión del Colegio Internacional San Francisco. Registro ágil y seguro en la nube.
+                    Bienvenidos al sistema automatizado de inscripción de la **U.E.E Rafael Angel Caridad**. Registro escolar ágil, estructurado y seguro en la nube.
                 </p>
                 <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
                     <button onclick="irAlLogin()" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-extrabold rounded-2xl text-white bg-indigo-600 hover:bg-indigo-500 shadow-xl shadow-indigo-600/30 transition-all transform hover:-translate-y-0.5 cursor-pointer">
@@ -192,7 +192,7 @@
                             <th class="px-6 py-4">Alumno</th>
                             <th class="px-6 py-4">Grado / Año</th>
                             <th class="px-6 py-4">Representante</th>
-                            <th class="px-6 py-4 text-right">Gestión</th>
+                            <th class="px-6 py-4 text-right">Acciones</th>
                         </tr>
                     </thead>
                     <tbody id="tablaAlumnosBody" class="divide-y text-sm"></tbody>
@@ -202,7 +202,7 @@
         </div>
     </main>
 
-    <!-- SECCIÓN 5: FORMULARIO DE INSCRIPCIÓN (COLORIDO Y ULTRA PROFESIONAL) -->
+    <!-- SECCIÓN 5: FORMULARIO DE INSCRIPCIÓN -->
     <main id="seccionFormulario" class="hidden flex-grow py-12 px-4 max-w-4xl mx-auto w-full fade-in">
         <div class="mb-8 flex items-center justify-between">
             <button onclick="mostrarDashboard()" class="text-sm font-bold text-slate-500 flex items-center gap-2">
@@ -219,7 +219,7 @@
         </div>
 
         <form onsubmit="guardarInscripcion(event)" class="space-y-8">
-            <!-- TARJETA 1: DATOS ALUMNO (CON CABECERA Y COLOR ROBUSTO) -->
+            <!-- TARJETA 1: DATOS ALUMNO -->
             <div class="bg-white rounded-3xl border border-indigo-100 shadow-xl overflow-hidden">
                 <div class="bg-gradient-to-r from-indigo-600 to-indigo-800 px-8 py-5 text-white">
                     <h3 class="text-lg font-extrabold flex items-center">
@@ -263,7 +263,7 @@
                 </div>
             </div>
 
-            <!-- TARJETA 2: DATOS REPRESENTANTE (DEGRADADO VIOLETA REAL) -->
+            <!-- TARJETA 2: DATOS REPRESENTANTE -->
             <div class="bg-white rounded-3xl border border-purple-100 shadow-xl overflow-hidden">
                 <div class="bg-gradient-to-r from-purple-600 to-purple-850 px-8 py-5 text-white">
                     <h3 class="text-lg font-extrabold flex items-center">
@@ -289,6 +289,65 @@
         </form>
     </main>
 
+    <!-- VENTANA MODAL: EXPEDIENTE DETALLADO DEL ALUMNO (NUEVA FUNCIÓN REQUERIDA) -->
+    <div id="detallesModal" class="hidden fixed inset-0 z-[90] flex items-center justify-center p-4 bg-slate-900/70 backdrop-blur-sm overflow-y-auto">
+        <div class="bg-white rounded-[32px] max-w-2xl w-full shadow-2xl border border-slate-200 overflow-hidden my-8 fade-in">
+            <!-- Encabezado Ficha -->
+            <div class="bg-gradient-to-r from-indigo-900 via-indigo-800 to-purple-900 px-8 py-6 text-white flex justify-between items-center">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-amber-400">Expediente de Inscripción Escolar</span>
+                    <h3 id="detFichaNombre" class="text-2xl font-black mt-1">Nombre Alumno</h3>
+                </div>
+                <button onclick="cerrarDetallesModal()" class="text-white/80 hover:text-white bg-white/10 hover:bg-white/20 p-2.5 rounded-2xl transition-all">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            
+            <div class="p-8 space-y-6 max-h-[70vh] overflow-y-auto">
+                <!-- Información Alumno -->
+                <div>
+                    <h4 class="text-xs font-black uppercase text-indigo-600 tracking-wider mb-3 flex items-center gap-1.5 border-b pb-2">
+                        <i class="fa-solid fa-child"></i> Información del Alumno
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                        <p class="bg-slate-50 p-3 rounded-xl"><strong class="text-slate-500 block text-xs">Grado / Lapso Asignado:</strong> <span id="detGrado" class="font-semibold text-slate-800"></span></p>
+                        <p class="bg-slate-50 p-3 rounded-xl"><strong class="text-slate-500 block text-xs">Fecha de Nacimiento:</strong> <span id="detFechaNac" class="font-semibold text-slate-800"></span></p>
+                        <p class="bg-slate-50 p-3 rounded-xl"><strong class="text-slate-500 block text-xs">Género:</strong> <span id="detGenero" class="font-semibold text-slate-800"></span></p>
+                        <p class="bg-slate-50 p-3 rounded-xl"><strong class="text-slate-500 block text-xs">Fecha de Registro:</strong> <span id="detFechaReg" class="font-semibold text-slate-800"></span></p>
+                    </div>
+                </div>
+
+                <!-- Información Representante -->
+                <div>
+                    <h4 class="text-xs font-black uppercase text-purple-600 tracking-wider mb-3 flex items-center gap-1.5 border-b pb-2">
+                        <i class="fa-solid fa-user-shield"></i> Información del Representante
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                        <p class="bg-slate-50 p-3 rounded-xl"><strong class="text-slate-500 block text-xs">Nombre Completo:</strong> <span id="detRepNombre" class="font-semibold text-slate-800"></span></p>
+                        <p class="bg-slate-50 p-3 rounded-xl"><strong class="text-slate-500 block text-xs">Parentesco / Relación:</strong> <span id="detRepParentesco" class="font-semibold text-slate-800"></span></p>
+                        <p class="bg-slate-50 p-3 rounded-xl"><strong class="text-slate-500 block text-xs">Teléfono Móvil:</strong> <span id="detRepTelefono" class="font-semibold text-slate-800"></span></p>
+                        <p class="bg-slate-50 p-3 rounded-xl"><strong class="text-slate-500 block text-xs">Correo Electrónico:</strong> <span id="detRepEmail" class="font-semibold text-slate-800"></span></p>
+                    </div>
+                </div>
+
+                <!-- Dirección Completa -->
+                <div>
+                    <h4 class="text-xs font-black uppercase text-amber-600 tracking-wider mb-3 flex items-center gap-1.5 border-b pb-2">
+                        <i class="fa-solid fa-location-dot"></i> Dirección de Habitación
+                    </h4>
+                    <p class="bg-slate-50 p-4 rounded-xl text-sm font-semibold text-slate-800 leading-relaxed" id="detRepDireccion"></p>
+                </div>
+            </div>
+
+            <!-- Pie de Ficha -->
+            <div class="bg-slate-50 border-t px-8 py-5 flex justify-end">
+                <button onclick="cerrarDetallesModal()" class="bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold px-6 py-3 rounded-xl transition-all text-sm">
+                    Cerrar Ficha
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- VENTANA MODAL DE ALERTAS PERSONALIZADAS (Reemplazo para alert()) -->
     <div id="customModal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
         <div class="bg-white rounded-3xl p-8 max-w-sm w-full shadow-2xl text-center border">
@@ -313,7 +372,7 @@
     <!-- PIE DE PÁGINA -->
     <footer class="bg-white border-t border-slate-200 py-6 mt-auto">
         <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-400">
-            <p>© 2026 Colegio Internacional San Francisco. Todos los derechos reservados.</p>
+            <p>© 2026 U.E.E Rafael Angel Caridad. Todos los derechos reservados.</p>
             <p class="mt-1">Datos en la nube de Google Firebase Cloud.</p>
         </div>
     </footer>
@@ -336,6 +395,9 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
+        // Memoria para guardar la lista de alumnos localmente para consulta instantánea
+        let listaAlumnosLocal = {};
+
         // Hacer funciones accesibles desde el HTML global
         window.cambiarVistaAuth = cambiarVistaAuth;
         window.ejecutarRegistro = ejecutarRegistro;
@@ -344,6 +406,8 @@
         window.mostrarFormularioInscripcion = mostrarFormularioInscripcion;
         window.guardarInscripcion = guardarInscripcion;
         window.eliminar = eliminar;
+        window.verDetalles = verDetalles;
+        window.cerrarDetallesModal = cerrarDetallesModal;
         window.cerrarSesion = cerrarSesion;
         window.irAlLogin = irAlLogin;
         window.irAlInicio = irAlInicio;
@@ -456,6 +520,8 @@
             await addDoc(collection(db, "alumnos"), {
                 nombre: document.getElementById('alumnoNombre').value,
                 apellido: document.getElementById('alumnoApellido').value,
+                fechaNac: document.getElementById('alumnoFechaNac').value,
+                genero: document.getElementById('alumnoGenero').value,
                 grado: document.getElementById('alumnoGrado').value,
                 repNombre: document.getElementById('repNombre').value,
                 repParentesco: document.getElementById('repParentesco').value,
@@ -465,6 +531,9 @@
                 fechaRegistro: new Date().toISOString()
             });
             alertCustom("¡Guardado!", "Ficha sincronizada en tiempo real.");
+            
+            // Limpia los campos del formulario tras subir la información
+            document.querySelector('#seccionFormulario form').reset();
             mostrarDashboard();
         }
 
@@ -473,22 +542,70 @@
             tbody.innerHTML = '<tr><td colspan="4" class="p-10 text-center"><i class="fa-solid fa-spinner animate-spin"></i> Cargando base de datos...</td></tr>';
             const qSnap = await getDocs(collection(db, "alumnos"));
             tbody.innerHTML = '';
+            listaAlumnosLocal = {};
+
             if (qSnap.empty) {
                 document.getElementById('tablaVaciaMensaje').classList.remove('hidden');
             } else {
                 document.getElementById('tablaVaciaMensaje').classList.add('hidden');
                 qSnap.forEach(snap => {
                     const d = snap.data();
-                    tbody.innerHTML += `<tr class="border-b">
-                        <td class="px-6 py-4 font-bold">${d.apellido}, ${d.nombre}</td>
-                        <td class="px-6 py-4">${d.grado}</td>
-                        <td class="px-6 py-4">${d.repNombre}</td>
-                        <td class="px-6 py-4 text-right">
-                            <button onclick="eliminar('${snap.id}')" class="text-red-500 font-bold hover:text-red-700 transition-colors">Eliminar</button>
+                    listaAlumnosLocal[snap.id] = d;
+
+                    tbody.innerHTML += `<tr class="border-b hover:bg-slate-50/50 transition-colors">
+                        <td class="px-6 py-4 font-bold text-slate-900">${d.apellido}, ${d.nombre}</td>
+                        <td class="px-6 py-4">
+                            <span class="inline-flex items-center px-2.5 py-1.5 rounded-lg text-xs font-semibold ${d.grado.includes('Kinder') ? 'bg-indigo-50 text-indigo-700' : 'bg-purple-50 text-purple-700'}">
+                                ${d.grado}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 text-slate-600">${d.repNombre}</td>
+                        <td class="px-6 py-4 text-right space-x-2">
+                            <button onclick="verDetalles('${snap.id}')" class="text-indigo-600 hover:text-indigo-800 font-extrabold transition-colors px-3 py-2 bg-indigo-50 hover:bg-indigo-100 rounded-xl text-xs inline-flex items-center gap-1">
+                                <i class="fa-solid fa-eye"></i> Ver Ficha
+                            </button>
+                            <button onclick="eliminar('${snap.id}')" class="text-red-500 hover:text-red-700 font-bold transition-colors px-3 py-2 bg-red-50 hover:bg-red-100 rounded-xl text-xs inline-flex items-center gap-1">
+                                <i class="fa-solid fa-trash"></i> Eliminar
+                            </button>
                         </td>
                     </tr>`;
                 });
             }
+        }
+
+        // MOSTRAR EXPEDIENTE DETALLADO DEL ALUMNO EN LA VENTANA MODAL
+        function verDetalles(id) {
+            const alumno = listaAlumnosLocal[id];
+            if (!alumno) return;
+
+            // Rellenar datos escolares y personales del alumno
+            document.getElementById('detFichaNombre').innerText = `${alumno.nombre} ${alumno.apellido}`;
+            document.getElementById('detGrado').innerText = alumno.grado || 'No especificado';
+            document.getElementById('detFechaNac').innerText = formatearFecha(alumno.fechaNac);
+            document.getElementById('detGenero').innerText = alumno.genero || 'No especificado';
+            document.getElementById('detFechaReg').innerText = alumno.fechaRegistro ? new Date(alumno.fechaRegistro).toLocaleString() : 'No registrada';
+
+            // Rellenar datos del tutor/representante
+            document.getElementById('detRepNombre').innerText = alumno.repNombre || 'No especificado';
+            document.getElementById('detRepParentesco').innerText = alumno.repParentesco || 'No especificado';
+            document.getElementById('detRepTelefono').innerText = alumno.repTelefono || 'No especificado';
+            document.getElementById('detRepEmail').innerText = alumno.repEmail || 'No especificado';
+            document.getElementById('detRepDireccion').innerText = alumno.repDireccion || 'Dirección no especificada.';
+
+            document.getElementById('detallesModal').classList.remove('hidden');
+        }
+
+        function cerrarDetallesModal() {
+            document.getElementById('detallesModal').classList.add('hidden');
+        }
+
+        function formatearFecha(fechaStr) {
+            if(!fechaStr) return 'No especificada';
+            const partes = fechaStr.split('-');
+            if(partes.length === 3) {
+                return `${partes[2]}/${partes[1]}/${partes[0]}`; // Formato DD/MM/AAAA
+            }
+            return fechaStr;
         }
 
         async function eliminar(id) {
