@@ -9,7 +9,7 @@
     <!-- Google Fonts para tipografía de alta legibilidad -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2 family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- FontAwesome para iconos modernos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
@@ -41,7 +41,6 @@
                         radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.12) 0%, transparent 45%),
                         #0f172a;
         }
-        /* Estilos enfocados para el formulario colorido y profesional */
         .form-input-container:focus-within .form-icon {
             color: #6366f1;
             transform: scale(1.1);
@@ -50,10 +49,39 @@
             border-color: #6366f1;
             box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
         }
-        /* Estilos para el select con categorías */
         optgroup {
             font-style: normal;
             padding: 10px;
+        }
+
+        /* ESTILOS EXCLUSIVOS PARA LA IMPRESIÓN DE LA FICHA */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #detallesModal, #detallesModal * {
+                visibility: visible;
+            }
+            #detallesModal {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                background: white !important;
+                padding: 0 !important;
+            }
+            #detallesModal > div {
+                box-shadow: none !important;
+                border: none !important;
+                max-width: 100% !important;
+                width: 100% !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .p-8 {
+                padding: 1.5rem !important;
+            }
         }
     </style>
 </head>
@@ -210,7 +238,6 @@
             </button>
         </div>
 
-        <!-- Indicador de Progreso Atractivo -->
         <div class="bg-gradient-to-r from-indigo-900 to-indigo-800 rounded-3xl p-8 text-white mb-8 shadow-xl border border-indigo-750">
             <h2 class="text-2xl font-black">Nueva Ficha de Admisión Digital</h2>
             <div class="w-full bg-indigo-950/60 h-2 rounded-full mt-4">
@@ -239,17 +266,13 @@
                             <option value="Femenino">Femenino</option>
                         </select>
                         
-                        <!-- SELECT CON SEPARADORES POR CATEGORIAS -->
                         <select id="alumnoGrado" required class="w-full px-4 py-3.5 border border-slate-200 rounded-xl focus:border-indigo-500 focus:outline-none bg-white">
                             <option value="">Grado / Año...</option>
-                            <!-- Categoría: Educación Inicial (Kinder) -->
                             <optgroup label="Educación Inicial (Kinder)" class="font-bold text-indigo-600 bg-indigo-50">
                                 <option value="Kinder - 1er Lapso">Kinder - 1er Lapso</option>
                                 <option value="Kinder - 2do Lapso">Kinder - 2do Lapso</option>
                                 <option value="Kinder - 3er Lapso">Kinder - 3er Lapso</option>
                             </optgroup>
-
-                            <!-- Categoría: Escuela Primaria -->
                             <optgroup label="Escuela Primaria (Grados)" class="font-bold text-purple-600 bg-purple-50">
                                 <option value="1er Grado">1er Grado</option>
                                 <option value="2do Grado">2do Grado</option>
@@ -289,7 +312,7 @@
         </form>
     </main>
 
-    <!-- VENTANA MODAL: EXPEDIENTE DETALLADO DEL ALUMNO (NUEVA FUNCIÓN REQUERIDA) -->
+    <!-- VENTANA MODAL: EXPEDIENTE DETALLADO DEL ALUMNO (CON OPCIÓN DE IMPRESIÓN) -->
     <div id="detallesModal" class="hidden fixed inset-0 z-[90] flex items-center justify-center p-4 bg-slate-900/70 backdrop-blur-sm overflow-y-auto">
         <div class="bg-white rounded-[32px] max-w-2xl w-full shadow-2xl border border-slate-200 overflow-hidden my-8 fade-in">
             <!-- Encabezado Ficha -->
@@ -298,9 +321,14 @@
                     <span class="text-xs font-bold uppercase tracking-wider text-amber-400">Expediente de Inscripción Escolar</span>
                     <h3 id="detFichaNombre" class="text-2xl font-black mt-1">Nombre Alumno</h3>
                 </div>
-                <button onclick="cerrarDetallesModal()" class="text-white/80 hover:text-white bg-white/10 hover:bg-white/20 p-2.5 rounded-2xl transition-all">
-                    <i class="fa-solid fa-xmark text-lg"></i>
-                </button>
+                <div class="flex items-center space-x-2 no-print">
+                    <button onclick="imprimirFicha()" class="text-white hover:bg-white/20 bg-white/10 px-4 py-2.5 rounded-2xl transition-all text-xs font-bold flex items-center gap-2 cursor-pointer">
+                        <i class="fa-solid fa-print text-sm"></i> Imprimir Ficha
+                    </button>
+                    <button onclick="cerrarDetallesModal()" class="text-white/80 hover:text-white bg-white/10 hover:bg-white/20 p-2.5 rounded-2xl transition-all">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
             </div>
             
             <div class="p-8 space-y-6 max-h-[70vh] overflow-y-auto">
@@ -340,7 +368,7 @@
             </div>
 
             <!-- Pie de Ficha -->
-            <div class="bg-slate-50 border-t px-8 py-5 flex justify-end">
+            <div class="bg-slate-50 border-t px-8 py-5 flex justify-end no-print">
                 <button onclick="cerrarDetallesModal()" class="bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold px-6 py-3 rounded-xl transition-all text-sm">
                     Cerrar Ficha
                 </button>
@@ -348,7 +376,7 @@
         </div>
     </div>
 
-    <!-- VENTANA MODAL DE ALERTAS PERSONALIZADAS (Reemplazo para alert()) -->
+    <!-- VENTANA MODAL DE ALERTAS PERSONALIZADAS -->
     <div id="customModal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
         <div class="bg-white rounded-3xl p-8 max-w-sm w-full shadow-2xl text-center border">
             <h3 id="modalTitle" class="text-xl font-black text-slate-900 mb-2"></h3>
@@ -357,7 +385,7 @@
         </div>
     </div>
 
-    <!-- VENTANA MODAL DE CONFIRMACIÓN (Reemplazo para confirm()) -->
+    <!-- VENTANA MODAL DE CONFIRMACIÓN -->
     <div id="confirmModal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
         <div class="bg-white rounded-3xl p-8 max-w-sm w-full border shadow-2xl text-center">
             <h3 class="text-xl font-black text-slate-900 mb-2">¿Estás seguro?</h3>
@@ -377,12 +405,12 @@
         </div>
     </footer>
 
-    <!-- LOGICA DE FIREBASE V12 Y SISTEMA -->
+    <!-- LÓGICA DE FIREBASE V12 Y SISTEMA -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
         import { getFirestore, collection, addDoc, getDocs, query, where, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
 
-        // CONFIGURACIÓN FIREBASE DE IVÁN (TU CONFIGURACIÓN REAL)
+        // CONFIGURACIÓN FIREBASE DE IVÁN
         const firebaseConfig = {
             apiKey: "AIzaSyCws6ATYRlf-9W418ZqHbO4xiKnpl_2yC8",
             authDomain: "pagina-de-inscripcion.firebaseapp.com",
@@ -395,10 +423,9 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // Memoria para guardar la lista de alumnos localmente para consulta instantánea
         let listaAlumnosLocal = {};
 
-        // Hacer funciones accesibles desde el HTML global
+        // Exponer funciones al scope global
         window.cambiarVistaAuth = cambiarVistaAuth;
         window.ejecutarRegistro = ejecutarRegistro;
         window.ejecutarLogin = ejecutarLogin;
@@ -408,6 +435,7 @@
         window.eliminar = eliminar;
         window.verDetalles = verDetalles;
         window.cerrarDetallesModal = cerrarDetallesModal;
+        window.imprimirFicha = imprimirFicha;
         window.cerrarSesion = cerrarSesion;
         window.irAlLogin = irAlLogin;
         window.irAlInicio = irAlInicio;
@@ -500,12 +528,16 @@
             e.preventDefault();
             const u = document.getElementById('loginUsuario').value.trim().toLowerCase();
             const p = document.getElementById('loginPassword').value;
-            const qSnap = await getDocs(query(collection(db, "maestros"), where("usuario", "==", u), where("password", "==", p)));
-            if (!qSnap.empty) { 
-                sessionStorage.setItem('m', qSnap.docs[0].data().nombre); 
-                ingresar(); 
-            } else {
-                alertCustom("Error", "Credenciales incorrectas.");
+            try {
+                const qSnap = await getDocs(query(collection(db, "maestros"), where("usuario", "==", u), where("password", "==", p)));
+                if (!qSnap.empty) { 
+                    sessionStorage.setItem('m', qSnap.docs[0].data().nombre); 
+                    ingresar(); 
+                } else {
+                    alertCustom("Error", "Credenciales incorrectas.");
+                }
+            } catch (err) {
+                alertCustom("Error", "Ocurrió un problema al validar el acceso.");
             }
         }
 
@@ -517,80 +549,82 @@
 
         async function guardarInscripcion(e) {
             e.preventDefault();
-            await addDoc(collection(db, "alumnos"), {
-                nombre: document.getElementById('alumnoNombre').value,
-                apellido: document.getElementById('alumnoApellido').value,
-                fechaNac: document.getElementById('alumnoFechaNac').value,
-                genero: document.getElementById('alumnoGenero').value,
-                grado: document.getElementById('alumnoGrado').value,
-                repNombre: document.getElementById('repNombre').value,
-                repParentesco: document.getElementById('repParentesco').value,
-                repTelefono: document.getElementById('repTelefono').value,
-                repEmail: document.getElementById('repEmail').value,
-                repDireccion: document.getElementById('repDireccion').value,
-                fechaRegistro: new Date().toISOString()
-            });
-            alertCustom("¡Guardado!", "Ficha sincronizada en tiempo real.");
-            
-            // Limpia los campos del formulario tras subir la información
-            document.querySelector('#seccionFormulario form').reset();
-            mostrarDashboard();
+            try {
+                const alumnoData = {
+                    alumnoNombre: document.getElementById('alumnoNombre').value.trim(),
+                    alumnoApellido: document.getElementById('alumnoApellido').value.trim(),
+                    alumnoFechaNac: document.getElementById('alumnoFechaNac').value,
+                    alumnoGenero: document.getElementById('alumnoGenero').value,
+                    alumnoGrado: document.getElementById('alumnoGrado').value,
+                    repNombre: document.getElementById('repNombre').value.trim(),
+                    repParentesco: document.getElementById('repParentesco').value.trim(),
+                    repTelefono: document.getElementById('repTelefono').value.trim(),
+                    repEmail: document.getElementById('repEmail').value.trim(),
+                    repDireccion: document.getElementById('repDireccion').value.trim(),
+                    fechaRegistro: new Date().toLocaleDateString('es-VE')
+                };
+
+                await addDoc(collection(db, "alumnos"), alumnoData);
+                alertCustom("¡Éxito!", "Inscripción registrada correctamente en la nube.");
+                e.target.reset();
+                mostrarDashboard();
+            } catch (err) {
+                alertCustom("Error", "No se pudo guardar la inscripción.");
+            }
         }
 
         async function actualizarTabla() {
             const tbody = document.getElementById('tablaAlumnosBody');
-            tbody.innerHTML = '<tr><td colspan="4" class="p-10 text-center"><i class="fa-solid fa-spinner animate-spin"></i> Cargando base de datos...</td></tr>';
-            const qSnap = await getDocs(collection(db, "alumnos"));
+            const mensajeVacio = document.getElementById('tablaVaciaMensaje');
             tbody.innerHTML = '';
             listaAlumnosLocal = {};
 
-            if (qSnap.empty) {
-                document.getElementById('tablaVaciaMensaje').classList.remove('hidden');
-            } else {
-                document.getElementById('tablaVaciaMensaje').classList.add('hidden');
-                qSnap.forEach(snap => {
-                    const d = snap.data();
-                    listaAlumnosLocal[snap.id] = d;
+            try {
+                const qSnap = await getDocs(collection(db, "alumnos"));
+                if (qSnap.empty) {
+                    mensajeVacio.classList.remove('hidden');
+                    return;
+                }
+                mensajeVacio.classList.add('hidden');
 
-                    tbody.innerHTML += `<tr class="border-b hover:bg-slate-50/50 transition-colors">
-                        <td class="px-6 py-4 font-bold text-slate-900">${d.apellido}, ${d.nombre}</td>
-                        <td class="px-6 py-4">
-                            <span class="inline-flex items-center px-2.5 py-1.5 rounded-lg text-xs font-semibold ${d.grado.includes('Kinder') ? 'bg-indigo-50 text-indigo-700' : 'bg-purple-50 text-purple-700'}">
-                                ${d.grado}
-                            </span>
-                        </td>
-                        <td class="px-6 py-4 text-slate-600">${d.repNombre}</td>
+                qSnap.forEach(docSnap => {
+                    const data = docSnap.data();
+                    const id = docSnap.id;
+                    listaAlumnosLocal[id] = data;
+
+                    const tr = document.createElement('tr');
+                    tr.className = "hover:bg-slate-50 transition-colors border-b border-slate-100";
+                    tr.innerHTML = `
+                        <td class="px-6 py-4 font-bold text-slate-800">${data.alumnoNombre} ${data.alumnoApellido}</td>
+                        <td class="px-6 py-4"><span class="px-3 py-1 bg-indigo-50 text-indigo-700 font-semibold rounded-full text-xs">${data.alumnoGrado}</span></td>
+                        <td class="px-6 py-4 text-slate-600">${data.repNombre} (${data.repParentesco})</td>
                         <td class="px-6 py-4 text-right space-x-2">
-                            <button onclick="verDetalles('${snap.id}')" class="text-indigo-600 hover:text-indigo-800 font-extrabold transition-colors px-3 py-2 bg-indigo-50 hover:bg-indigo-100 rounded-xl text-xs inline-flex items-center gap-1">
-                                <i class="fa-solid fa-eye"></i> Ver Ficha
-                            </button>
-                            <button onclick="eliminar('${snap.id}')" class="text-red-500 hover:text-red-700 font-bold transition-colors px-3 py-2 bg-red-50 hover:bg-red-100 rounded-xl text-xs inline-flex items-center gap-1">
-                                <i class="fa-solid fa-trash"></i> Eliminar
-                            </button>
+                            <button onclick="verDetalles('${id}')" class="text-indigo-600 hover:bg-indigo-50 p-2 rounded-lg transition-colors" title="Ver Expediente"><i class="fa-solid fa-eye"></i></button>
+                            <button onclick="eliminar('${id}')" class="text-red-500 hover:bg-red-50 p-2 rounded-lg transition-colors" title="Eliminar Registro"><i class="fa-solid fa-trash"></i></button>
                         </td>
-                    </tr>`;
+                    `;
+                    tbody.appendChild(tr);
                 });
+            } catch (err) {
+                alertCustom("Error", "No se pudieron obtener los registros.");
             }
         }
 
-        // MOSTRAR EXPEDIENTE DETALLADO DEL ALUMNO EN LA VENTANA MODAL
         function verDetalles(id) {
             const alumno = listaAlumnosLocal[id];
             if (!alumno) return;
 
-            // Rellenar datos escolares y personales del alumno
-            document.getElementById('detFichaNombre').innerText = `${alumno.nombre} ${alumno.apellido}`;
-            document.getElementById('detGrado').innerText = alumno.grado || 'No especificado';
-            document.getElementById('detFechaNac').innerText = formatearFecha(alumno.fechaNac);
-            document.getElementById('detGenero').innerText = alumno.genero || 'No especificado';
-            document.getElementById('detFechaReg').innerText = alumno.fechaRegistro ? new Date(alumno.fechaRegistro).toLocaleString() : 'No registrada';
+            document.getElementById('detFichaNombre').innerText = `${alumno.alumnoNombre} ${alumno.alumnoApellido}`;
+            document.getElementById('detGrado').innerText = alumno.alumnoGrado || 'No especificado';
+            document.getElementById('detFechaNac').innerText = alumno.alumnoFechaNac || 'No especificada';
+            document.getElementById('detGenero').innerText = alumno.alumnoGenero || 'No especificado';
+            document.getElementById('detFechaReg').innerText = alumno.fechaRegistro || 'N/A';
 
-            // Rellenar datos del tutor/representante
             document.getElementById('detRepNombre').innerText = alumno.repNombre || 'No especificado';
             document.getElementById('detRepParentesco').innerText = alumno.repParentesco || 'No especificado';
             document.getElementById('detRepTelefono').innerText = alumno.repTelefono || 'No especificado';
             document.getElementById('detRepEmail').innerText = alumno.repEmail || 'No especificado';
-            document.getElementById('detRepDireccion').innerText = alumno.repDireccion || 'Dirección no especificada.';
+            document.getElementById('detRepDireccion').innerText = alumno.repDireccion || 'Sin dirección registrada.';
 
             document.getElementById('detallesModal').classList.remove('hidden');
         }
@@ -599,28 +633,29 @@
             document.getElementById('detallesModal').classList.add('hidden');
         }
 
-        function formatearFecha(fechaStr) {
-            if(!fechaStr) return 'No especificada';
-            const partes = fechaStr.split('-');
-            if(partes.length === 3) {
-                return `${partes[2]}/${partes[1]}/${partes[0]}`; // Formato DD/MM/AAAA
-            }
-            return fechaStr;
+        function imprimirFicha() {
+            window.print();
         }
 
         async function eliminar(id) {
-            const botonConfirmar = document.getElementById('btnConfirmarEliminar');
-            botonConfirmar.onclick = () => cerrarConfirmModal(true);
+            const btnConfirmar = document.getElementById('btnConfirmarEliminar');
             
-            const confirmado = await mostrarConfirmacionCustom();
-            if(confirmado) {
-                await deleteDoc(doc(db, "alumnos", id));
-                alertCustom("¡Eliminado!", "Ficha borrada correctamente de la base de datos.");
-                actualizarTabla();
-            }
+            const accionEliminar = async () => {
+                try {
+                    await deleteDoc(doc(db, "alumnos", id));
+                    cerrarConfirmModal(true);
+                    actualizarTabla();
+                } catch (err) {
+                    cerrarConfirmModal(false);
+                    alertCustom("Error", "No se pudo eliminar el registro.");
+                }
+            };
+
+            btnConfirmar.onclick = accionEliminar;
+            await mostrarConfirmacionCustom();
         }
 
-        if(sessionStorage.getItem('m')) {
+        if (sessionStorage.getItem('m')) {
             ingresar();
         }
     </script>
